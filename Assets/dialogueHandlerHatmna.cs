@@ -9,10 +9,12 @@ public class dialogueHandlerHatmna : MonoBehaviour
     Animator animator;
     Rigidbody2D body2d;
     BoxCollider2D box;
+    public Image portrait;
     public Text text1;
     public int npcSelect;
     int dialogCount ;
     float timeLeft = 10.0f;
+    public Sprite portraitPic;
 
     //0 for hat
     //1 for fat
@@ -32,11 +34,11 @@ public class dialogueHandlerHatmna : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
-        {
-            clearText();
-        }
+        //timeLeft -= Time.deltaTime;
+        //if (timeLeft <= 0)
+        //{
+         //   clearText();
+        //}
     }
     public void Interact()
     {
@@ -47,6 +49,9 @@ public class dialogueHandlerHatmna : MonoBehaviour
             switch(dialogCount)
             {
                 case 0:
+                    portrait.color = Color.white;
+                    portrait.sprite = portraitPic;
+                    portrait.enabled = true;
                     text1.text = "Hello";
                     dialogCount++;
                     break;
@@ -66,7 +71,28 @@ public class dialogueHandlerHatmna : MonoBehaviour
         }
         else if (npcSelect == 1)
         {
+            switch (dialogCount)
+            {
+                case 0://prime example
+                    portrait.color = Color.white;
+                    portrait.sprite =portraitPic;
+                    portrait.enabled = true;
+                    text1.text = "Hello";
+                    dialogCount++;
+                    break;
 
+                case 1:
+                    text1.text = "Im fat and gay";
+                    dialogCount++;
+                    break;
+                case 2:
+                    text1.text = "The people of this village ";
+                    dialogCount++;
+                    break;
+
+                default:
+                    break;
+            }
         }
        else if (npcSelect == 2)
         {
