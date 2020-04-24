@@ -113,7 +113,6 @@ public class dialogueHandlerHatmna : MonoBehaviour
         {
 
         }
-
        else if (npcSelect == 3)
         {
 
