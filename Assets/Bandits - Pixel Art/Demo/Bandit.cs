@@ -18,6 +18,9 @@ public class Bandit : MonoBehaviour {
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
     public int attackDamage = 20;
+    bool gem = false;
+    bool stick = false;
+   
    
     
     // Use this for initialization
@@ -146,5 +149,13 @@ public class Bandit : MonoBehaviour {
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
 
+    }
+
+    public void keyItemTick(int index)
+    {
+        if(index==1)
+        {
+            stick = true;
+        }
     }
 }
