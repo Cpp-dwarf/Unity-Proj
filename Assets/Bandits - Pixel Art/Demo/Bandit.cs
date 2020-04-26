@@ -33,17 +33,9 @@ public class Bandit : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Check if character just landed on the ground
-        if (!m_grounded && m_groundSensor.State()) {
-            m_grounded = true;
-            m_animator.SetBool("Grounded", m_grounded);
-        }
-
-        //Check if character just started falling
-        if(m_grounded && !m_groundSensor.State()) {
-            m_grounded = false;
-            m_animator.SetBool("Grounded", m_grounded);
-        }
-
+        m_grounded= m_body2d.velocity.y == 0;
+        m_animator.SetBool("Grounded", m_grounded);
+        
         // -- Handle input and movement --
         float inputX = Input.GetAxis("Horizontal");
 
@@ -142,20 +134,5 @@ public class Bandit : MonoBehaviour {
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-            return;
-
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-
-    }
-
-    public void keyItemTick(int index)
-    {
-        if(index==1)
-        {
-            stick = true;
-        }
-    }
+  
 }

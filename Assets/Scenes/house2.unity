@@ -14136,7 +14136,8 @@ GameObject:
   - component: {fileID: 1505695291}
   - component: {fileID: 1505695292}
   - component: {fileID: 1505695295}
-  m_Layer: 9
+  - component: {fileID: 1505695296}
+  m_Layer: 10
   m_Name: gem-4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14278,6 +14279,21 @@ MonoBehaviour:
   DescriptiveText: {fileID: 1739884554}
   otherButton: {fileID: 0}
   otherButton2: {fileID: 0}
+--- !u!114 &1505695296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505695290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2117ade88a556044a997129cebc74ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Gem
+  Description: A Gem
+  itemIndex: 0
 --- !u!1 &1614552391
 GameObject:
   m_ObjectHideFlags: 0
