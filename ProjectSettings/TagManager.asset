@@ -16,7 +16,7 @@ TagManager:
   - obstacle
   - Enemies
   - Items
-  - 
+  - dialogue
   - 
   - 
   - 
@@ -40,4 +40,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 1814044991
     locked: 0

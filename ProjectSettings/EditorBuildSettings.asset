@@ -27,6 +27,6 @@ EditorBuildSettings:
     path: Assets/Scenes/house5.unity
     guid: 4745b0dc37f6aa24b95d73837523c545
   - enabled: 1
-    path: Assets/Scenes/house6.unity
+    path: Assets/Scenes/eric's puzzle.unity
     guid: d1b8eeeffc2cba744a1d32ac2600690e
   m_configObjects: {}

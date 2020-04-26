@@ -860,7 +860,8 @@ GameObject:
   - component: {fileID: 637592581}
   - component: {fileID: 637592580}
   - component: {fileID: 637592579}
-  m_Layer: 9
+  - component: {fileID: 637592584}
+  m_Layer: 10
   m_Name: leverKeyItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +930,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.38662374, y: 3.8091044}
+  m_Size: {x: 0.38662374, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &637592582
 SpriteRenderer:
@@ -971,7 +972,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3fc2bbd409bf34ab6af1637bab569da1, type: 3}
-  m_Color: {r: 0.2392157, g: 0.09411766, b: 0.023529414, a: 1}
+  m_Color: {r: 0.4433962, g: 0.20561264, b: 0.08993414, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -989,12 +990,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637592578}
   m_LocalRotation: {x: -0, y: -0, z: 0.26455265, w: 0.9643713}
-  m_LocalPosition: {x: 1183, y: 115.9, z: 0}
+  m_LocalPosition: {x: 1182.5, y: 120.7, z: 0}
   m_LocalScale: {x: 68.578186, y: 5.6254354, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30.681002}
+--- !u!114 &637592584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637592578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2117ade88a556044a997129cebc74ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: A walking stick
+  Description: A walking stick
+  itemIndex: 0
 --- !u!1 &684165721 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1489972970735248, guid: ecba8dbba1cf5cf499ff7c730d1a58b9,

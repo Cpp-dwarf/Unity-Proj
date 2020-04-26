@@ -11,15 +11,15 @@ public class Bandit : MonoBehaviour {
     private Sensor_Bandit       m_groundSensor;
     private bool                m_grounded = false;
     private bool                m_combatIdle = false;
-    private bool                m_isDead = false;
-
+    private float DialogueTimeout = 3.0f;
     public Animator animator;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
+    public LayerMask dialogueLayers;
     public int attackDamage = 20;
-    bool gem = false;
-    bool stick = false;
+    private float lastVelocity = 0;
+    
    
    
     
@@ -32,8 +32,17 @@ public class Bandit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(DialogueTimeout > 0.0f)
+        {
+            DialogueTimeout -= Time.deltaTime;
+            if(DialogueTimeout <= 0.0f)
+            {
+                FindObjectOfType<DialogueManager>().ClearDialogue();
+            }
+        }
         //Check if character just landed on the ground
-        m_grounded= m_body2d.velocity.y == 0;
+        m_grounded = lastVelocity > -.01 && lastVelocity < .01 && m_body2d.velocity.y > - .01 && m_body2d.velocity.y < .01;
+        lastVelocity = m_body2d.velocity.y;
         m_animator.SetBool("Grounded", m_grounded);
         
         // -- Handle input and movement --
@@ -60,27 +69,23 @@ public class Bandit : MonoBehaviour {
 
         //Hurt
         else if (Input.GetKeyDown("q"))
-            dialogue();
-
+        {
+            Dialogue();
+        }
         //Attack
-        else if (Input.GetMouseButtonDown(0))
+       /* else if (Input.GetMouseButtonDown(0))
         {
             m_animator.SetTrigger("Attack");
-            Attack();
-        }
-
-        //Change between idle and combat idle
-        else if (Input.GetKeyDown("f"))
-            m_combatIdle = !m_combatIdle;
-
+        }*/
         //Jump
-        else if (Input.GetKeyDown("space") && m_grounded)
+        else if (Input.GetKeyDown("space"))
         {
+            if (m_grounded) { 
             m_animator.SetTrigger("Jump");
             m_grounded = false;
             m_animator.SetBool("Grounded", m_grounded);
             m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
-            m_groundSensor.Disable(0.2f);
+            m_groundSensor.Disable(0.2f); }
         }
 
         //Run
@@ -97,18 +102,6 @@ public class Bandit : MonoBehaviour {
     }
 
 
-    //custom attack handler
-    void Attack()
-    {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        //physics simulation for melee interactions
-        foreach(Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("we hit "+ enemy.name);
-            enemy.GetComponent<EnemyAIhandler>().TakeDamage(20);
-        }
-    }
-
     void Interact()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -121,14 +114,15 @@ public class Bandit : MonoBehaviour {
             
         }
     }
-    void dialogue()
+    void Dialogue()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, dialogueLayers);
         //physics simulation for interactions
         foreach (Collider2D enemy in hitEnemies)
         {
+            DialogueTimeout = 3.0f;
             Debug.Log("we dialogued " + enemy.name);
-            enemy.GetComponent<dialogueHandlerHatmna>().Interact();
+            enemy.GetComponent<DialogueTrigger>().TriggerDialogue();
             
             
         }
