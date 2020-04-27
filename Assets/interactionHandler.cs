@@ -42,12 +42,14 @@ public class interactionHandler : MonoBehaviour
     {
         if (interactionIndex == 0)//outside rope pulley interaction
         {
+            theObject.GetComponent<Collider2D>().isTrigger = false;
             Destroy(body2d);
             Destroy(animator);
             Destroy(box);
             otherBody.constraints = RigidbodyConstraints2D.None;
-            theObject.transform.position = new Vector3(1072, 85, 0);
-            DescriptiveText.text = "The rope creaks and snaps, dropping the crate";
+            theObject.transform.position = new Vector3(1598, 85, 0);
+            FindObjectOfType<DialogueManager>().TextDialogue("The rope creaks and snaps!");
+            FindObjectOfType<DialogueManager>().setTimer(4.0f);
         }
         if (interactionIndex == 1)
         {
@@ -76,24 +78,33 @@ public class interactionHandler : MonoBehaviour
             theObject.transform.position = new Vector3(1167, 122, 0);
 
         }
-        //default item pickup
-        if (interactionIndex == 4)
-        {
-            Destroy(body2d);
-            Destroy(animator);
-            Destroy(box);
-            Destroy(render);
-            DescriptiveText.text = "You've obtained the Traveller's walking stick";
-
-        }
         if (interactionIndex == 5)
         {
-            Destroy(body2d);
-            Destroy(animator);
-            Destroy(box);
-            Destroy(render);
-            DescriptiveText.text = "You've obtained the Traveller's Gem!";
-
+            bool destroyed = false;
+            GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in gos)
+            {
+                foreach (Properties item in player.GetComponent<inventory>().itemList)
+                {
+                    if (item.itemIndex == 6) //book
+                    {
+                        Destroy(theObject);
+                        FindObjectOfType<DialogueManager>().TextDialogue("You put the book on the bookshelf, and it slides into the ground!");
+                        FindObjectOfType<DialogueManager>().setTimer(4.0f);
+                        GameObject door1 = GameObject.Find("door hitbox"); door1.GetComponent<MoveScene2d>().enable = true;
+                        Properties prop = gameObject.AddComponent<Properties>();
+                        prop.Name = "Damnation"; //inventory object so if they leave the cabin nothing will break
+                        prop.Description = "Don't go downstairs.";
+                        prop.itemIndex = 19;
+                        destroyed = true;
+                    }
+                }
+            }
+            if (!destroyed)
+            {
+                FindObjectOfType<DialogueManager>().TextDialogue("A book seems to be missing. . .");
+                FindObjectOfType<DialogueManager>().setTimer(4.0f);
+            }
         }
     }
 }

@@ -9,8 +9,7 @@ public class inventory : MonoBehaviour
     public Transform playerCenter;
     public float pickUpRange = 12;
     public LayerMask itemLayer;
-    
-
+   
     //List of items
     public List<Properties> itemList;
 
@@ -42,8 +41,7 @@ public class inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Check if character just landed on the ground
-  
+
         if (Input.GetKeyDown("g"))
         {
             Grab();
@@ -63,14 +61,18 @@ public class inventory : MonoBehaviour
         Collider2D[] items = Physics2D.OverlapCircleAll(playerCenter.position, pickUpRange, itemLayer);
         foreach (Collider2D item in items)
         {
+            FindObjectOfType<DialogueManager>().setTimer(4.0f);
             Properties props = copyProps(item.GetComponent<Properties>());
             AddItem(props);
-            Debug.Log(item.GetComponent<Properties>().Name);
+            FindObjectOfType<DialogueManager>().TextDialogue("You found " + item.GetComponent<Properties>().Description + "!");
+            switch (item.GetComponent<Properties>().itemIndex)
+            {
+                //case 0: GameObject door2 = GameObject.Find("door2"); door2.GetComponent<MoveScene2d>().enable = true;
+                 //   break; //Walking Stick
+                case 13: GameObject door1 = GameObject.Find("door1"); door1.GetComponent<MoveScene2d>().enable = true;
+                    break; //Barrel
+            }
             Destroy(item.gameObject);
-        }
-        foreach (Properties item in itemList)
-        {
-            Debug.Log(item.Name);
         }
 
     }

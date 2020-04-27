@@ -11,7 +11,7 @@ public class Bandit : MonoBehaviour {
     private Sensor_Bandit       m_groundSensor;
     private bool                m_grounded = false;
     private bool                m_combatIdle = false;
-    private float DialogueTimeout = 3.0f;
+    
     public Animator animator;
     public Transform attackPoint;
     public float attackRange = 0.5f;
@@ -32,14 +32,7 @@ public class Bandit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(DialogueTimeout > 0.0f)
-        {
-            DialogueTimeout -= Time.deltaTime;
-            if(DialogueTimeout <= 0.0f)
-            {
-                FindObjectOfType<DialogueManager>().ClearDialogue();
-            }
-        }
+       
         //Check if character just landed on the ground
         m_grounded = lastVelocity > -.01 && lastVelocity < .01 && m_body2d.velocity.y > - .01 && m_body2d.velocity.y < .01;
         lastVelocity = m_body2d.velocity.y;
@@ -72,6 +65,7 @@ public class Bandit : MonoBehaviour {
         {
             Dialogue();
         }
+       
         //Attack
        /* else if (Input.GetMouseButtonDown(0))
         {
@@ -120,7 +114,7 @@ public class Bandit : MonoBehaviour {
         //physics simulation for interactions
         foreach (Collider2D enemy in hitEnemies)
         {
-            DialogueTimeout = 3.0f;
+            FindObjectOfType<DialogueManager>().setTimer(4.0f);
             Debug.Log("we dialogued " + enemy.name);
             enemy.GetComponent<DialogueTrigger>().TriggerDialogue();
             

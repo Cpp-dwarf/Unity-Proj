@@ -23,8 +23,14 @@ public class SceneLoader : MonoBehaviour
 
     public void OnEnteredExitTrigger(string triggerName, string levelToLoad) //Called from MoveScene2d (The script on all door colliders to check if player wants to enter)
     {
-        GameObject gameObject = GameObject.FindWithTag("Player"); //Makes sure player isnt destroyed on load
-        DontDestroyOnLoad(gameObject);
+        GameObject player = GameObject.FindWithTag("Player"); //Makes sure player isnt destroyed on load
+        DontDestroyOnLoad(player);
+        GameObject DialogueManager = GameObject.FindWithTag("DialogueManager"); //Makes sure dialoguemanager isnt destroyed on load
+        GameObject Canvas = GameObject.FindWithTag("Canvas");
+        DontDestroyOnLoad(DialogueManager);
+        DontDestroyOnLoad(Canvas);
+        
+       
         lastTrigger = triggerName;
         SceneManager.LoadScene(levelToLoad); //Loads scene
     }

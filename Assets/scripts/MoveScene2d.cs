@@ -9,6 +9,24 @@ public class MoveScene2d : MonoBehaviour
     public string levelToLoad;
     public Transform spawnPoint;
     public bool enable = true; //Enable is so that if the door behind the bookshelf does not look for the player while the bookshelf is in front of it
+    public int enablerItem = -1;
+    public bool hidden = false;
+
+    void Start()
+    {
+        //Search Player Inventory for enabler item
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in gos)
+        {
+            foreach (Properties item in player.GetComponent<inventory>().itemList)
+            {
+                if (item.itemIndex == enablerItem)
+                {
+                    enable = true;
+                }
+            }
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D x)
     {
@@ -18,6 +36,11 @@ public class MoveScene2d : MonoBehaviour
             {
                 SceneLoader.instance.OnEnteredExitTrigger(triggerName, levelToLoad);
                 enable = false;
+            }
+            else if(!hidden)
+            {
+                FindObjectOfType<DialogueManager>().TextDialogue("You can't open the door . . .");
+                FindObjectOfType<DialogueManager>().setTimer(3.0f);
             }
         }
     }
@@ -30,6 +53,11 @@ public class MoveScene2d : MonoBehaviour
             {
                 SceneLoader.instance.OnEnteredExitTrigger(triggerName, levelToLoad);
                 enable = false;
+            }
+            else if (!hidden)
+            {
+                FindObjectOfType<DialogueManager>().TextDialogue("You can't open the door . . .");
+                FindObjectOfType<DialogueManager>().setTimer(3.0f);
             }
         }
     }

@@ -9,5 +9,10 @@ public class DialogueTrigger : MonoBehaviour
     public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        dialogue.index++;
+        if(dialogue.index >= dialogue.sentences.Length)
+        {
+            dialogue.index = dialogue.sentences.Length-1;
+        }
     }
 }
