@@ -7042,6 +7042,7 @@ GameObject:
   - component: {fileID: 788750453}
   - component: {fileID: 788750454}
   - component: {fileID: 788750455}
+  - component: {fileID: 788750456}
   m_Layer: 9
   m_Name: Woman
   m_TagString: Untagged
@@ -7171,6 +7172,28 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &788750456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788750450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0de893b96e00c1428e2de6a77e33bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    profile: {fileID: 0}
+    sentences:
+    - 'Who let you in?! '
+    - The man outside?! I told him I wasn't ready for anymore vict...I mean customers...
+    - You aren't here to buy? Then why are you here?!
+    - Your friend?...I do recall another...customer come by earlier.
+    - He dropped that book over there by the bookshelf but I figured he would come
+      back for it later...
+    index: 0
 --- !u!1 &1115886318
 GameObject:
   m_ObjectHideFlags: 0
